@@ -28,3 +28,44 @@ npm-debug.log*
 # Build
 dist/
 build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.whl
+
+# pytest
+.pytest_cache/
+.cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets / credentials
+credentials.json
+*.pem
+*.key

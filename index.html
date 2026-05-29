@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Эмиль — техспец онлайн-школ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --surface-2: #1c1c1c;
+      --border: #242424;
+      --accent: #6c63ff;
+      --accent-dim: rgba(108, 99, 255, 0.12);
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --radius: 12px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* ── LAYOUT ──────────────────────────────────── */
+    section {
+      padding: 100px 5%;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .hero-promo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      color: #4da6ff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(77, 166, 255, 0.35);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-promo:hover {
+      color: #80c1ff;
+      border-color: rgba(128, 193, 255, 0.6);
+    }
+
+    /* ── SERVICES ────────────────────────────────── */
+    #services {
+      background: var(--surface);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── HOW I WORK ──────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .step {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .step-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-dim);
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .step h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CASES ───────────────────────────────────── */
+    #cases {
+      background: var(--surface);
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .case-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .case-card:hover {
+      border-color: var(--accent);
+    }
+
+    .case-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 10px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .case-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .case-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .case-result {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .case-result strong {
+      color: var(--accent);
+    }
+
+    .cases-cta {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* ── CONTACTS ────────────────────────────────── */
+    .contacts-inner {
+      max-width: 540px;
+    }
+
+    .contacts-inner p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      width: fit-content;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+    }
+
+    .contact-link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .city-note {
+      margin-top: 36px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* ── SCROLL ANIMATION ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 16px 4%; }
+      .nav-links { display: none; }
+      section { padding: 72px 4%; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Эмиль<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#process">Процесс</a></li>
+      <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">
+          <span class="hero-dot"></span>
+          Техспец онлайн-школ · Уфа
+        </div>
+        <h1>Автоматизирую<br /><span>онлайн-школы</span><br />под ключ</h1>
+        <p class="hero-sub">
+          Настраиваю GetCourse, Salebot, AmoCRM и Telegram-боты —
+          чтобы ваши процессы работали без ручного труда.
+        </p>
+        <a class="btn-primary" href="https://t.me/dalshebolshe03" target="_blank" rel="noopener">
+          ✈ Написать в Telegram
+        </a>
+        <br />
+        <a class="hero-promo" href="https://t.me/EM_techhhh" target="_blank" rel="noopener">
+          🔥 Закажи прямо сейчас — получи скидку
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <span class="section-label reveal">Услуги</span>
+      <h2 class="reveal">Что я делаю</h2>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">🎓</div>
+          <h3>GetCourse</h3>
+          <p>Настройка школы с нуля, автоворонки, страницы оплаты, сегментация базы и аналитика.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🤖</div>
+          <h3>Salebot и чат-боты</h3>
+          <p>Боты для продаж, прогрева и поддержки в Telegram и ВКонтакте. Сценарии любой сложности.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🔗</div>
+          <h3>AmoCRM и интеграции</h3>
+          <p>Настройка воронок, подключение мессенджеров, интеграция с GetCourse и сторонними сервисами.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">⚡</div>
+          <h3>Telegram-боты на заказ</h3>
+          <p>Боты для бизнеса: запись клиентов, рассылки, CRM-интеграция. Уже реализованы боты для салонов красоты.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <span class="section-label reveal">Процесс</span>
+      <h2 class="reveal">Как я работаю</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <h3>Созваниваемся</h3>
+          <p>Разбираемся в задаче, фиксируем цели и ожидаемый результат.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">02</div>
+          <h3>Составляю план</h3>
+          <p>Описываю схему реализации, стек инструментов и сроки — всё прозрачно.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03</div>
+          <h3>Реализую</h3>
+          <p>Настраиваю и тестирую. Держу в курсе на каждом этапе.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">04</div>
+          <h3>Передаю и обучаю</h3>
+          <p>Сдаю проект с объяснением: вы понимаете, как всё работает, и можете управлять сами.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section id="cases">
+    <div class="container">
+      <span class="section-label reveal">Кейсы</span>
+      <h2 class="reveal">Примеры работ</h2>
+      <div class="cases-grid">
+        <div class="case-card reveal">
+          <span class="case-tag">Telegram-бот</span>
+          <h3>Бот для салона красоты</h3>
+          <p>
+            Разработал Telegram-бота <strong>@Vash_Salon_krasoty_bot</strong> для автоматизации работы салона:
+            запись клиентов, напоминания о визитах, витрина услуг — всё внутри мессенджера без звонков и переписки вручную.
+          </p>
+          <div class="case-result">
+            <strong>Результат:</strong> запись клиентов полностью через бота — администратор освобождён от рутинных диалогов
+          </div>
+        </div>
+        <div class="case-card reveal">
+          <span class="case-tag">GetCourse</span>
+          <h3>[Название кейса 2]</h3>
+          <p>
+            [Опишите задачу и что было реализовано.]
+          </p>
+          <div class="case-result">
+            <strong>Результат:</strong> [цифра или ключевое изменение]
+          </div>
+        </div>
+        <div class="case-card reveal">
+          <span class="case-tag">Интеграция</span>
+          <h3>[Название кейса 3]</h3>
+          <p>
+            [Опишите задачу и что было реализовано.]
+          </p>
+          <div class="case-result">
+            <strong>Результат:</strong> [цифра или ключевое изменение]
+          </div>
+        </div>
+      </div>
+      <div class="cases-cta reveal">
+        <a class="btn-outline" href="https://t.me/EM_techhhh" target="_blank" rel="noopener">
+          📂 Все наши работы — смотреть в канале
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts">
+    <div class="container">
+      <span class="section-label reveal">Контакты</span>
+      <h2 class="reveal">Обсудим задачу</h2>
+      <div class="contacts-inner reveal">
+        <p>
+          Напишите — расскажите задачу в двух словах,
+          и я отвечу в течение дня.
+        </p>
+        <div class="contact-links">
+          <a class="contact-link" href="https://t.me/dalshebolshe03" target="_blank" rel="noopener">
+            <span class="contact-link-icon">✈</span>
+            @dalshebolshe03
+          </a>
+          <a class="contact-link" href="mailto:dlyatelefona03@yandex.ru">
+            <span class="contact-link-icon">✉</span>
+            dlyatelefona03@yandex.ru
+          </a>
+        </div>
+        <p class="city-note">📍 Уфа · работаю удалённо по всей России</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Эмиль — техспец онлайн-школ</p>
+    <a href="https://t.me/dalshebolshe03" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+
+</body>
+</html>
